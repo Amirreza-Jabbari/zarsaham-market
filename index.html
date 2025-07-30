@@ -3,35 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Live Market Board - Zarsaham</title>
+    <title>zarsaham.com | زرسهام</title>
+    <link rel="icon" href="/favicon.png" type="image/png">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700;800&display=swap" rel="stylesheet">
     <style>
+        /* Font Imports */
+        @font-face {
+          font-family: 'VazirBold';
+          src: url('/fonts/VazirBold/VazirBold.eot');
+          src: url('/fonts/VazirBold/VazirBold.eot?#iefix') format('embedded-opentype'),
+               url('/fonts/VazirBold/VazirBold.woff') format('woff'),
+               url('/fonts/VazirBold/VazirBold.ttf') format('truetype');
+          font-weight: bold;
+          font-style: normal;
+          font-display: swap;
+        }
+
+        @font-face {
+          font-family: 'TwoMedium';
+          src: url('/fonts/TwoMedium/TwoMedium.eot');
+          src: url('/fonts/TwoMedium/TwoMedium.eot?#iefix') format('embedded-opentype'),
+               url('/fonts/TwoMedium/TwoMedium.woff') format('woff'),
+               url('/fonts/TwoMedium/TwoMedium.ttf') format('truetype');
+          font-weight: normal;
+          font-style: normal;
+          font-display: swap;
+        }
+        
+        @font-face {
+          font-family: 'BYekan';
+          src: url('/fonts/BYekan/BYekan.eot');
+          src: url('/fonts/BYekan/BYekan.eot?#iefix') format('embedded-opentype'),
+               url('/fonts/BYekan/BYekan.woff') format('woff'),
+               url('/fonts/BYekan/BYekan.ttf') format('truetype');
+          font-weight: normal;
+          font-style: normal;
+          font-display: swap;
+        }
+
+        /* Base Styles */
         body {
             font-family: 'Vazirmatn', sans-serif;
-            background-color: white;
+            background-color: #111827;
             display: flex;
             align-items: center;
             justify-content: center;
             min-height: 100vh;
             margin: 0;
-            overflow: hidden; /* Hide scrollbars */
+            overflow: hidden;
         }
         .bg-brand-gold { background-color: #F6C347; }
         .text-brand-gold { color: #F6C347; }
         
-        /* Digital-style font for prices */
-        @font-face {
-            font-family: 'Digital';
-            src: url('https://db.onlinewebfonts.com/t/99285533b66a50b6348b346914932159.woff2') format('woff2');
+        /* Font Helper Classes */
+        .vazir-text {
+            font-family: 'VazirBold', sans-serif;
+        }
+        .twomedium-text {
+            font-family: 'TwoMedium', sans-serif;
         }
         .font-digital {
-            
+            font-family: 'BYekan', sans-serif;
         }
 
-        /* Styles for price tickers */
+        /* Ticker Styles */
         .ticker-wrap {
             position: relative;
             width: 100%;
@@ -51,37 +89,65 @@
             align-items: center;
             font-size: 1.1rem;
             padding: 0 2.5rem;
-            color: #d1d5db; /* gray-300 */
+            color:rgb(228, 231, 237);
         }
         .ticker-item .price-up { color: #4ade80; }
         .ticker-item .price-down { color: #f87171; }
 
         @keyframes marquee {
             from { transform: translateX(0); }
-            to   { transform: translateX(-50%); } /* Animate to half the width for seamless loop */
+            to   { transform: translateX(-50%); }
+        }
+
+        /* Fullscreen Styles */
+        #market:fullscreen {
+            max-width: none;
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            background-color: #111827;
+        }
+        #market:fullscreen > div {
+            height: 100%;
+            border-radius: 0;
+            border: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        #market:fullscreen #market-grid {
+            flex-grow: 1;
+            align-content: center;
         }
     </style>
 </head>
 <body class="antialiased">
 
-    <main class="w-full h-full flex items-center justify-center pt-[0px]">
+    <main class="w-full h-full flex items-center justify-center p-4">
         <section id="market" class="w-full max-w-7xl">
             <div class="w-full mx-auto bg-gray-900 p-2 sm:p-4 rounded-3xl border-4 border-gray-700 shadow-2xl bg-gradient-to-br from-gray-800 to-black">
-                <div class="relative flex justify-between items-center px-4 py-3 border-b border-gray-700/50">
+                
+                <div class="relative flex justify-between items-center px-4 h-28 border-b-4 border-green-500">
+                    
                     <div class="flex items-center gap-2">
-                        <svg class="w-8 h-8 text-brand-gold" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18 9 11.25l4.306 4.306a11.95 11.95 0 0 1 5.814-5.518l2.74-1.20m0 0-5.94-2.28m5.94 2.28-2.28 5.94" /></svg>
+                        <svg class="w-8 h-8 text-brand-gold" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18 9 11.25l4.306 4.306a11.95 11.95 0 0 1 5.814-5.518l2.74-1.20m0 0-5.94-2.28m5.94 2.28-2.28 5.94" /></svg>
                         <span class="relative flex h-3 w-3">
                             <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
                             <span class="relative inline-flex rounded-full h-3 w-3 bg-red-600"></span>
                         </span>
                         <span class="font-bold text-xl text-red-600">زنده</span>
                     </div>
-                    <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-                        <img src="/logo.png" alt="Logo" class="h-12 md:h-14 w-auto">
+
+                    <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
+                        <img src="/logo.png" alt="Logo" class="h-20 w-auto">
+                        <p class="twomedium-text text-white mt-2 mb-4 text-xl font-bold">طلای ناب شمایید</p>
                     </div>
+
                     <div id="marketDate" class="text-xl font-bold text-brand-gold"></div>
+
                 </div>
-                <div class="p-4 md:p-6">
+
+                <div class="p-1 md:p-1">
                     <div id="market-grid" class="grid grid-cols-2 md:grid-cols-4 gap-4 text-white">
                         <div class="col-span-full text-center py-16 text-gray-400">
                             در حال بارگذاری اطلاعات بازار...
@@ -91,61 +157,57 @@
                 <div class="p-4 pt-2 md:pt-4 space-y-3">
                     <div class="ticker-wrap"><div class="ticker-move" style="animation-duration: 30s;"><div class="ticker-content"><div class="ticker-item">مثقال طلا: <span class="font-digital mx-2">--</span></div><div class="ticker-item">گرم طلای ۱۸: <span class="font-digital mx-2">--</span></div><div class="ticker-item">سکه امامی: <span class="font-digital mx-2">--</span></div><div class="ticker-item">نیم سکه: <span class="font-digital mx-2">--</span></div><div class="ticker-item">مثقال طلا: <span class="font-digital mx-2">--</span></div><div class="ticker-item">گرم طلای ۱۸: <span class="font-digital mx-2">--</span></div><div class="ticker-item">سکه امامی: <span class="font-digital mx-2">--</span></div><div class="ticker-item">نیم سکه: <span class="font-digital mx-2">--</span></div></div></div></div>
                     <div class="ticker-wrap"><div class="ticker-move" style="animation-duration: 25s; animation-direction: reverse;"><div class="ticker-content"><div class="ticker-item">سکه گرمی: <span class="font-digital mx-2">--</span></div><div class="ticker-item">حباب آبشده: <span class="font-digital mx-2">--</span></div><div class="ticker-item">طلای ۱۸ عیار / ۷۴۰: <span class="font-digital mx-2">--</span></div><div class="ticker-item">سکه بهار آزادی: <span class="font-digital mx-2">--</span></div><div class="ticker-item">سکه گرمی: <span class="font-digital mx-2">--</span></div><div class="ticker-item">حباب آبشده: <span class="font-digital mx-2">--</span></div><div class="ticker-item">طلای ۱۸ عیار / ۷۴۰: <span class="font-digital mx-2">--</span></div><div class="ticker-item">سکه بهار آزادی: <span class="font-digital mx-2">--</span></div></div></div></div>
-                    <div class="ticker-wrap"><div class="ticker-move" style="animation-duration: 50s;"><div class="ticker-content"><div class="ticker-item">نشانی: <span class="mx-2">تهران پاساژ فلان پلاک فلان</span></div><div class="ticker-item">شماره های تماس: <span class="font-digital mx-2">۰۲۱-۳۳۴۵۰۰۰۰      ۰۲۱-۳۳۴۵۰۰۰۱</span></div><div class="ticker-item">اینستاگرام: <span class="font-digital mx-2">ZarSaham@</span></div><div class="ticker-item">آدرس سایت: <span class="font-digital mx-2">zarsaham.com</span></div><div class="ticker-item">نشانی: <span class="mx-2">تهران پاساژ فلان پلاک فلان</span></div><div class="ticker-item">شماره های تماس: <span class="font-digital mx-2">۰۲۱-۳۳۴۵۰۰۰۰      ۰۲۱-۳۳۴۵۰۰۰۱</span></div><div class="ticker-item">اینستاگرام: <span class="font-digital mx-2">ZarSaham@</span></div><div class="ticker-item">آدرس سایت: <span class="font-digital mx-2">zarsaham.com</span></div></div></div></div>
+                    <div class="ticker-wrap"><div class="ticker-move" style="animation-duration: 50s;"><div class="ticker-content"><div class="ticker-item">نشانی: <span class="mx-2">تهران پاساژ فلان پلاک فلان</span></div><div class="ticker-item">شماره های تماس: <span class="font-digital mx-2">۰۲۱-۳۳۴۵۰۰۰۰      ۰۲۱-۳۳۴۵۰۰۰۱</span></div><div class="ticker-item">اینستاگرام: <span class="font-digital mx-2">Zar_Saham@</span></div><div class="ticker-item">آدرس سایت: <span class="font-digital mx-2">zarsaham.com</span></div><div class="ticker-item">نشانی: <span class="mx-2">تهران پاساژ فلان پلاک فلان</span></div><div class="ticker-item">شماره های تماس: <span class="font-digital mx-2">۰۲۱-۳۳۴۵۰۰۰۰      ۰۲۱-۳۳۴۵۰۰۰۱</span></div><div class="ticker-item">اینستاگرام: <span class="font-digital mx-2">ZarSaham@</span></div><div class="ticker-item">آدرس سایت: <span class="font-digital mx-2">zarsaham.com</span></div></div></div></div>
                 </div>
             </div>
         </section>
     </main>
 
+    <button id="fullscreen-btn" type="button" title="تمام صفحه" class="fixed bottom-6 left-6 bg-gray-700/50 backdrop-blur-sm p-3 text-white rounded-full hover:bg-gray-600/70 transition-colors focus:outline-none focus:ring-2 focus:ring-white">
+        <span id="icon-enter-fs">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m4.5 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15" />
+            </svg>
+        </span>
+        <span id="icon-exit-fs" class="hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 9V4.5M9 9H4.5M9 9 3.75 3.75M9 15v4.5M9 15H4.5M9 15l-5.25 5.25M15 9V4.5M15 9h4.5M15 9l5.25-5.25M15 15v4.5M15 15h4.5M15 15l5.25 5.25" />
+            </svg>
+        </span>
+    </button>
+
     <script>
     document.addEventListener('DOMContentLoaded', () => {
 
         const API_URL = 'https://api.zarsaham.com/api/Portal/GoldPanel';
-        const UPDATE_INTERVAL = 5000; // Update every 5 seconds
+        const UPDATE_INTERVAL = 30000;
 
         const formatPrice = (price) => new Intl.NumberFormat('fa-IR').format(price);
         
-        // =======================================================
-        // ✨ HERO CODE: PRECISE PERSIAN DATE & TIME FORMATTING ✨
-        // =======================================================
         const formatDate = () => {
             const now = new Date();
-
-            // --- Get each date part individually for full control over the order ---
             const weekday = new Intl.DateTimeFormat('fa-IR', { weekday: 'long' }).format(now);
             const day = new Intl.DateTimeFormat('fa-IR', { day: 'numeric' }).format(now);
             const month = new Intl.DateTimeFormat('fa-IR', { month: 'long' }).format(now);
             const year = new Intl.DateTimeFormat('fa-IR', { year: 'numeric' }).format(now);
-
-            // --- Format the time part ---
-            const timeOptions = {
-                hour: '2-digit',
-                minute: '2-digit',
-                hour12: false, // Use 24-hour format
-            };
+            const timeOptions = { hour: '2-digit', minute: '2-digit', hour12: false };
             const timeString = new Intl.DateTimeFormat('fa-IR', timeOptions).format(now);
-
-            // --- Assemble the final string in the exact desired order ---
-            return `${weekday} ${day} ${month} ${year} ساعت ${timeString}`;
+            return `${timeString}&nbsp;&nbsp;&nbsp;${weekday} ${day} ${month} ${year}`;
         };
-
 
         async function updateMarketData() {
             try {
                 const response = await fetch(API_URL);
                 if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
                 const data = await response.json();
-
                 const allItems = [...data.MainItems, ...data.SubItems];
                 const itemMap = allItems.reduce((map, item) => {
                     map[item.Title] = item;
                     return map;
                 }, {});
-
                 updateDate();
                 updateGrid(itemMap);
                 updateTickers(itemMap);
-
             } catch (error) {
                 console.error("Could not update market data: 🛑", error);
                 const gridContainer = document.getElementById('market-grid');
@@ -155,94 +217,116 @@
 
         function updateDate() {
             const dateElement = document.getElementById('marketDate');
-            if (dateElement) dateElement.textContent = formatDate();
+            if (dateElement) dateElement.innerHTML = formatDate();
         }
 
         function updateGrid(itemMap) {
             const gridContainer = document.getElementById('market-grid');
             if (!gridContainer) return;
-
-            const gridItemTitles = [
-                'آبشده نقدی', 'مثقال طلا ', 'طلای 18 عیار / 750', 'سکه بهار آزادی ',
-                'سکه امامی ', 'طلای 24 عیار', 'نیم سکه ', 'ربع سکه '
-            ];
-
+            const gridItemTitles = [ 'آبشده نقدی', 'مثقال طلا ', 'طلای 18 عیار / 750', 'سکه بهار آزادی ', 'سکه امامی ', 'طلای 24 عیار', 'نیم سکه ', 'ربع سکه ' ];
             let gridHTML = '';
             gridItemTitles.forEach(title => {
                 const item = itemMap[title];
                 if (item) {
                     const change = Number(item.Change);
                     let colorClass = 'text-gray-400';
+                    let changeContent = '';
+
+                    const upArrow = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="4" stroke="currentColor" class="w-6 h-6 inline-block"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" /></svg>`;
+                    const downArrow = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="4" stroke="currentColor" class="w-6 h-6 inline-block"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg>`;
+
                     if (change !== 0) {
+                        const arrow = item.IsNegative ? downArrow : upArrow;
                         colorClass = item.IsNegative ? 'text-red-400' : 'text-green-400';
+                        const absChange = formatPrice(Math.abs(change));
+                        
+                        changeContent = `
+                            <div class="flex items-center justify-start gap-x-1">
+                                <span>%${absChange}</span>
+                                ${arrow}
+                            </div>`;
+                    } else {
+                        changeContent = `<span>--</span>`;
                     }
 
                     gridHTML += `
-                        <div class="bg-gray-800/60 p-4 rounded-lg text-center transition-all hover:bg-gray-700/80 hover:scale-105">
-                            <p class="text-lg text-gray-400 font-sans">${item.Title.trim()}</p>
-                            <p class="text-4xl my-2 font-digital ${colorClass}">${formatPrice(item.Price)}</p>
-                            <p class="text-md font-sans font-bold ${colorClass}">${change >= 0 ? '+' : ''}${formatPrice(change)}</p>
+                        <div class="bg-gray-800/60 p-4 rounded-lg flex flex-col justify-between h-full transition-all hover:bg-gray-700/80 hover:scale-105">
+                            <p class="text-lg text-white vazir-text text-right">${item.Title.trim()}</p>
+                            <p class="text-5xl my-2 font-digital ${colorClass} text-left">${formatPrice(item.Price)}</p>
+                            <div class="text-md font-digital font-bold ${colorClass} text-right">
+                                ${changeContent}
+                            </div>
                         </div>`;
                 }
             });
             gridContainer.innerHTML = gridHTML;
         }
 
-        function updateTickers(itemMap) {
-            const tickerTitleMap = {
-                'سکه گرمی:': 'سکه گرمی ',
-                'حباب آبشده:': 'حباب آبشده',
-                'مثقال طلا:': 'مثقال طلا ',
-                'گرم طلای ۱۸:': 'طلای 18 عیار / 750',
-                'سکه امامی:': 'سکه امامی ',
-                'نیم سکه:': 'نیم سکه ',
-                'طلای ۱۸ عیار / ۷۴۰:': 'طلای 18 عیار / 740',
-                'سکه بهار آزادی:': 'سکه بهار آزادی ',
-            };
 
+        function updateTickers(itemMap) {
+            const tickerTitleMap = { 'سکه گرمی:': 'سکه گرمی ', 'حباب آبشده:': 'حباب آبشده', 'مثقال طلا:': 'مثقال طلا ', 'گرم طلای ۱۸:': 'طلای 18 عیار / 750', 'سکه امامی:': 'سکه امامی ', 'نیم سکه:': 'نیم سکه ', 'طلای ۱۸ عیار / ۷۴۰:': 'طلای 18 عیار / 740', 'سکه بهار آزادی:': 'سکه بهار آزادی ',};
             document.querySelectorAll('.ticker-item').forEach(itemElement => {
                 const label = itemElement.childNodes[0].nodeValue;
                 const priceSpan = itemElement.querySelector('.font-digital');
-
                 if (label && priceSpan) {
                     const apiTitle = tickerTitleMap[label.trim()];
                     const itemData = itemMap[apiTitle];
-
                     if (itemData) {
                         priceSpan.textContent = formatPrice(itemData.Price);
                         const change = Number(itemData.Change);
                         priceSpan.classList.remove('price-up', 'price-down');
-                        if (change !== 0) {
-                            priceSpan.classList.add(itemData.IsNegative ? 'price-down' : 'price-up');
-                        }
+                        if (change !== 0) priceSpan.classList.add(itemData.IsNegative ? 'price-down' : 'price-up');
                     }
                 }
             });
         }
 
-        // Initial and interval calls
         updateMarketData();
         setInterval(updateMarketData, UPDATE_INTERVAL);
 
-        // --- Fullscreen on Enter, Exit on Escape ---
-        const docElement = document.documentElement;
+        // =======================================================
+        // ✨ HERO CODE: FULLSCREEN BUTTON & KEYBOARD CONTROL ✨
+        // =======================================================
+        const fullscreenTarget = document.getElementById('market');
+        const fullscreenBtn = document.getElementById('fullscreen-btn');
+        const iconEnter = document.getElementById('icon-enter-fs');
+        const iconExit = document.getElementById('icon-exit-fs');
+
         const openFullscreen = () => {
-            if (docElement.requestFullscreen) {
-                docElement.requestFullscreen();
-            } else if (docElement.mozRequestFullScreen) { /* Firefox */
-                docElement.mozRequestFullScreen();
-            } else if (docElement.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
-                docElement.webkitRequestFullscreen();
-            } else if (docElement.msRequestFullscreen) { /* IE/Edge */
-                docElement.msRequestFullscreen();
+            if (fullscreenTarget.requestFullscreen) fullscreenTarget.requestFullscreen();
+            else if (fullscreenTarget.mozRequestFullScreen) fullscreenTarget.mozRequestFullScreen(); /* Firefox */
+            else if (fullscreenTarget.webkitRequestFullscreen) fullscreenTarget.webkitRequestFullscreen(); /* Chrome, Safari, Opera */
+            else if (fullscreenTarget.msRequestFullscreen) fullscreenTarget.msRequestFullscreen(); /* IE/Edge */
+        };
+
+        const closeFullscreen = () => {
+            if (document.exitFullscreen) document.exitFullscreen();
+            else if (document.mozCancelFullScreen) document.mozCancelFullScreen();
+            else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+            else if (document.msExitFullscreen) document.msExitFullscreen();
+        };
+
+        const toggleFullScreen = () => {
+            if (!document.fullscreenElement) openFullscreen();
+            else closeFullscreen();
+        };
+
+        const updateFullscreenIcon = () => {
+            if (!document.fullscreenElement) {
+                iconEnter.classList.remove('hidden');
+                iconExit.classList.add('hidden');
+            } else {
+                iconEnter.classList.add('hidden');
+                iconExit.classList.remove('hidden');
             }
         };
+
+        fullscreenBtn.addEventListener('click', toggleFullScreen);
+        document.addEventListener('fullscreenchange', updateFullscreenIcon);
         document.addEventListener('keydown', (event) => {
             if (event.key === 'Enter') {
                 event.preventDefault();
-                if (!document.fullscreenElement) {
-                    openFullscreen();
-                }
+                toggleFullScreen();
             }
         });
     });
