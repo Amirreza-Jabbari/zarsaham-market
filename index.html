@@ -53,7 +53,8 @@
             justify-content: center;
             min-height: 100vh;
             margin: 0;
-            overflow: hidden;
+            overflow-x: hidden;
+            overflow-y: auto;
         }
         .bg-brand-gold { background-color: #F6C347; }
         .text-brand-gold { color: #F6C347; }
@@ -84,11 +85,15 @@
             white-space: nowrap;
             animation: marquee 60s linear infinite;
         }
+        .ticker-content {
+            display: inline-flex;
+            align-items: center;
+        }
         .ticker-item {
             display: inline-flex;
             align-items: center;
             font-size: 1.1rem;
-            padding: 0 2.5rem;
+            padding: 0 2rem;
             color:rgb(228, 231, 237);
         }
         .ticker-item .price-up { color: #4ade80; }
@@ -106,6 +111,7 @@
             height: 100%;
             padding: 0;
             background-color: #111827;
+            overflow: hidden; /* Prevent any scrollbars in fullscreen */
         }
         #market:fullscreen > div {
             height: 100%;
@@ -115,8 +121,13 @@
             flex-direction: column;
             justify-content: space-between;
         }
+        #market:fullscreen #market-grid-wrapper {
+            flex-grow: 1; /* Allow grid to take up available space */
+            display: flex;
+            align-items: center; /* Vertically center the grid container */
+        }
         #market:fullscreen #market-grid {
-            flex-grow: 1;
+            width: 100%;
             align-content: center;
         }
     </style>
@@ -147,17 +158,18 @@
 
                 </div>
 
-                <div class="p-1 md:p-1">
-                    <div id="market-grid" class="grid grid-cols-2 md:grid-cols-4 gap-4 text-white">
+                <div id="market-grid-wrapper" class="p-4">
+                    <div id="market-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 text-white">
                         <div class="col-span-full text-center py-16 text-gray-400">
                             در حال بارگذاری اطلاعات بازار...
                         </div>
                     </div>
                 </div>
+
                 <div class="p-4 pt-2 md:pt-4 space-y-3">
-                    <div class="ticker-wrap"><div class="ticker-move" style="animation-duration: 30s;"><div class="ticker-content"><div class="ticker-item">مثقال طلا: <span class="font-digital mx-2">--</span></div><div class="ticker-item">گرم طلای ۱۸: <span class="font-digital mx-2">--</span></div><div class="ticker-item">سکه امامی: <span class="font-digital mx-2">--</span></div><div class="ticker-item">نیم سکه: <span class="font-digital mx-2">--</span></div><div class="ticker-item">مثقال طلا: <span class="font-digital mx-2">--</span></div><div class="ticker-item">گرم طلای ۱۸: <span class="font-digital mx-2">--</span></div><div class="ticker-item">سکه امامی: <span class="font-digital mx-2">--</span></div><div class="ticker-item">نیم سکه: <span class="font-digital mx-2">--</span></div></div></div></div>
-                    <div class="ticker-wrap"><div class="ticker-move" style="animation-duration: 25s; animation-direction: reverse;"><div class="ticker-content"><div class="ticker-item">سکه گرمی: <span class="font-digital mx-2">--</span></div><div class="ticker-item">حباب آبشده: <span class="font-digital mx-2">--</span></div><div class="ticker-item">طلای ۱۸ عیار / ۷۴۰: <span class="font-digital mx-2">--</span></div><div class="ticker-item">سکه بهار آزادی: <span class="font-digital mx-2">--</span></div><div class="ticker-item">سکه گرمی: <span class="font-digital mx-2">--</span></div><div class="ticker-item">حباب آبشده: <span class="font-digital mx-2">--</span></div><div class="ticker-item">طلای ۱۸ عیار / ۷۴۰: <span class="font-digital mx-2">--</span></div><div class="ticker-item">سکه بهار آزادی: <span class="font-digital mx-2">--</span></div></div></div></div>
-                    <div class="ticker-wrap"><div class="ticker-move" style="animation-duration: 50s;"><div class="ticker-content"><div class="ticker-item">نشانی: <span class="mx-2">تهران پاساژ فلان پلاک فلان</span></div><div class="ticker-item">شماره های تماس: <span class="font-digital mx-2">۰۲۱-۳۳۴۵۰۰۰۰      ۰۲۱-۳۳۴۵۰۰۰۱</span></div><div class="ticker-item">اینستاگرام: <span class="font-digital mx-2">Zar_Saham@</span></div><div class="ticker-item">آدرس سایت: <span class="font-digital mx-2">zarsaham.com</span></div><div class="ticker-item">نشانی: <span class="mx-2">تهران پاساژ فلان پلاک فلان</span></div><div class="ticker-item">شماره های تماس: <span class="font-digital mx-2">۰۲۱-۳۳۴۵۰۰۰۰      ۰۲۱-۳۳۴۵۰۰۰۱</span></div><div class="ticker-item">اینستاگرام: <span class="font-digital mx-2">ZarSaham@</span></div><div class="ticker-item">آدرس سایت: <span class="font-digital mx-2">zarsaham.com</span></div></div></div></div>
+                     <div id="ticker-subitems-1" class="ticker-wrap"></div>
+                    <div id="ticker-subitems-2" class="ticker-wrap"></div>
+                    <div class="ticker-wrap"><div class="ticker-move" style="animation-duration: 50s;"><div class="ticker-content"><div class="ticker-item">نشانی: <span class="mx-2">تهران-صادقیه-بین فلکه اول و دوم-پاساژ شبنم-طبقه همکف-واحد ۳۲</span></div><div class="ticker-item">شماره های تماس: <span class="font-digital mx-2">۰۲۱-۴۴۲۲۵۳۵۳</span></div><div class="ticker-item">اینستاگرام: <span class="font-digital mx-2">Zar_Saham@</span></div><div class="ticker-item">آدرس سایت: <span class="font-digital mx-2">www.zarsaham.com</span></div></div><div class="ticker-content"><div class="ticker-item">نشانی: <span class="mx-2">تهران پاساژ فلان پلاک فلان</span></div><div class="ticker-item">شماره های تماس: <span class="font-digital mx-2">۰۲۱-۳۳۴۵۰۰۰۰      ۰۲۱-۳۳۴۵۰۰۰۱</span></div><div class="ticker-item">اینستاگرام: <span class="font-digital mx-2">ZarSaham@</span></div><div class="ticker-item">آدرس سایت: <span class="font-digital mx-2">zarsaham.com</span></div></div></div></div>
                 </div>
             </div>
         </section>
@@ -180,7 +192,7 @@
     document.addEventListener('DOMContentLoaded', () => {
 
         const API_URL = 'https://api.zarsaham.com/api/Portal/GoldPanel';
-        const UPDATE_INTERVAL = 30000;
+        const UPDATE_INTERVAL = 30000; // 30 seconds
 
         const formatPrice = (price) => new Intl.NumberFormat('fa-IR').format(price);
         
@@ -200,14 +212,11 @@
                 const response = await fetch(API_URL);
                 if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
                 const data = await response.json();
-                const allItems = [...data.MainItems, ...data.SubItems];
-                const itemMap = allItems.reduce((map, item) => {
-                    map[item.Title] = item;
-                    return map;
-                }, {});
+                
                 updateDate();
-                updateGrid(itemMap);
-                updateTickers(itemMap);
+                updateGrid(data.MainItems || []);
+                updateSubItemTickers(data.SubItems || []);
+
             } catch (error) {
                 console.error("Could not update market data: 🛑", error);
                 const gridContainer = document.getElementById('market-grid');
@@ -220,65 +229,78 @@
             if (dateElement) dateElement.innerHTML = formatDate();
         }
 
-        function updateGrid(itemMap) {
+        function updateGrid(mainItems) {
             const gridContainer = document.getElementById('market-grid');
-            if (!gridContainer) return;
-            const gridItemTitles = [ 'آبشده نقدی', 'مثقال طلا ', 'طلای 18 عیار / 750', 'سکه بهار آزادی ', 'سکه امامی ', 'طلای 24 عیار', 'نیم سکه ', 'ربع سکه ' ];
+            if (!gridContainer || !mainItems.length) {
+                gridContainer.innerHTML = `<div class="col-span-full text-center py-16 text-gray-400">داده ای برای نمایش وجود ندارد.</div>`;
+                return;
+            };
+
             let gridHTML = '';
-            gridItemTitles.forEach(title => {
-                const item = itemMap[title];
-                if (item) {
-                    const change = Number(item.Change);
-                    let colorClass = 'text-gray-400';
-                    let changeContent = '';
+            mainItems.forEach(item => {
+                const change = parseFloat(item.Change);
+                let colorClass = 'text-gray-400';
+                let changeContent = '<span>--</span>';
 
-                    const upArrow = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="4" stroke="currentColor" class="w-6 h-6 inline-block"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" /></svg>`;
-                    const downArrow = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="4" stroke="currentColor" class="w-6 h-6 inline-block"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg>`;
+                const upArrow = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-6 h-6 inline-block"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" /></svg>`;
+                const downArrow = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-6 h-6 inline-block"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 4.5l15 15m0 0V8.25m0 11.25H8.25" /></svg>`;
 
-                    if (change !== 0) {
-                        const arrow = item.IsNegative ? downArrow : upArrow;
-                        colorClass = item.IsNegative ? 'text-red-400' : 'text-green-400';
-                        const absChange = formatPrice(Math.abs(change));
-                        
-                        changeContent = `
-                            <div class="flex items-center justify-start gap-x-1">
-                                <span>%${absChange}</span>
-                                ${arrow}
-                            </div>`;
-                    } else {
-                        changeContent = `<span>--</span>`;
-                    }
-
-                    gridHTML += `
-                        <div class="bg-gray-800/60 p-4 rounded-lg flex flex-col justify-between h-full transition-all hover:bg-gray-700/80 hover:scale-105">
-                            <p class="text-lg text-white vazir-text text-right">${item.Title.trim()}</p>
-                            <p class="text-5xl my-2 font-digital ${colorClass} text-left">${formatPrice(item.Price)}</p>
-                            <div class="text-md font-digital font-bold ${colorClass} text-right">
-                                ${changeContent}
-                            </div>
+                if (change !== 0) {
+                    const arrow = item.IsNegative ? downArrow : upArrow;
+                    colorClass = item.IsNegative ? 'text-red-400' : 'text-green-400';
+                    const absChange = formatPrice(Math.abs(change));
+                    
+                    changeContent = `
+                        <div class="flex items-center justify-start gap-x-1">
+                            <span>${arrow}%${absChange}</span>
+                            
                         </div>`;
                 }
+
+                gridHTML += `
+                    <div class="bg-gray-800/60 p-4 rounded-lg flex flex-col justify-between h-full transition-all hover:bg-gray-700/80 hover:scale-105">
+                        <p class="text-lg text-white vazir-text text-right">${item.Title.trim()}</p>
+                        <p class="text-4xl lg:text-5xl my-2 font-digital ${colorClass} text-left">${formatPrice(item.Price)}</p>
+                        <div class="text-md font-digital font-bold ${colorClass} text-right">
+                            ${changeContent}
+                        </div>
+                    </div>`;
             });
             gridContainer.innerHTML = gridHTML;
         }
 
+        function updateSubItemTickers(subItems) {
+            const ticker1Container = document.getElementById('ticker-subitems-1');
+            const ticker2Container = document.getElementById('ticker-subitems-2');
+            if (!ticker1Container || !ticker2Container) return;
 
-        function updateTickers(itemMap) {
-            const tickerTitleMap = { 'سکه گرمی:': 'سکه گرمی ', 'حباب آبشده:': 'حباب آبشده', 'مثقال طلا:': 'مثقال طلا ', 'گرم طلای ۱۸:': 'طلای 18 عیار / 750', 'سکه امامی:': 'سکه امامی ', 'نیم سکه:': 'نیم سکه ', 'طلای ۱۸ عیار / ۷۴۰:': 'طلای 18 عیار / 740', 'سکه بهار آزادی:': 'سکه بهار آزادی ',};
-            document.querySelectorAll('.ticker-item').forEach(itemElement => {
-                const label = itemElement.childNodes[0].nodeValue;
-                const priceSpan = itemElement.querySelector('.font-digital');
-                if (label && priceSpan) {
-                    const apiTitle = tickerTitleMap[label.trim()];
-                    const itemData = itemMap[apiTitle];
-                    if (itemData) {
-                        priceSpan.textContent = formatPrice(itemData.Price);
-                        const change = Number(itemData.Change);
-                        priceSpan.classList.remove('price-up', 'price-down');
-                        if (change !== 0) priceSpan.classList.add(itemData.IsNegative ? 'price-down' : 'price-up');
+            const generateTickerHTML = (items) => {
+                const itemsHTML = items.map(item => {
+                    const change = parseFloat(item.Change);
+                    let priceClass = '';
+                    if (change !== 0) {
+                        priceClass = item.IsNegative ? 'price-down' : 'price-up';
                     }
-                }
-            });
+                    return `<div class="ticker-item">${item.Title.trim()}: <span class="font-digital mx-2 ${priceClass}">${formatPrice(item.Price)}</span></div>`;
+                }).join('');
+                // Duplicate content for a seamless marquee effect
+                return `<div class="ticker-content">${itemsHTML}</div><div class="ticker-content">${itemsHTML}</div>`;
+            };
+
+            const chunk1 = subItems.slice(0, 4);
+            const chunk2 = subItems.slice(4, 8);
+
+            if (chunk1.length > 0) {
+                ticker1Container.innerHTML = `<div class="ticker-move" style="animation-duration: 40s;">${generateTickerHTML(chunk1)}</div>`;
+            } else {
+                ticker1Container.innerHTML = ''; // Clear if no data
+            }
+
+            if (chunk2.length > 0) {
+                ticker2Container.innerHTML = `<div class="ticker-move" style="animation-duration: 35s; animation-direction: reverse;">${generateTickerHTML(chunk2)}</div>`;
+            } else {
+                ticker2Container.innerHTML = ''; // Clear if no data
+            }
         }
 
         updateMarketData();
