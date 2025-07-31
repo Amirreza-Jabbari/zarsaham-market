@@ -198,12 +198,17 @@
         
         const formatDate = () => {
             const now = new Date();
-            const weekday = new Intl.DateTimeFormat('fa-IR', { weekday: 'long' }).format(now);
-            const day = new Intl.DateTimeFormat('fa-IR', { day: 'numeric' }).format(now);
-            const month = new Intl.DateTimeFormat('fa-IR', { month: 'long' }).format(now);
-            const year = new Intl.DateTimeFormat('fa-IR', { year: 'numeric' }).format(now);
-            const timeOptions = { hour: '2-digit', minute: '2-digit', hour12: false };
+        
+            const timeZoneOptions = { timeZone: 'Asia/Tehran' };
+        
+            const weekday = new Intl.DateTimeFormat('fa-IR', { ...timeZoneOptions, weekday: 'long' }).format(now);
+            const day = new Intl.DateTimeFormat('fa-IR', { ...timeZoneOptions, day: 'numeric' }).format(now);
+            const month = new Intl.DateTimeFormat('fa-IR', { ...timeZoneOptions, month: 'long' }).format(now);
+            const year = new Intl.DateTimeFormat('fa-IR', { ...timeZoneOptions, year: 'numeric' }).format(now);
+            
+            const timeOptions = { ...timeZoneOptions, hour: '2-digit', minute: '2-digit', hour12: false };
             const timeString = new Intl.DateTimeFormat('fa-IR', timeOptions).format(now);
+            
             return `${timeString}&nbsp;&nbsp;&nbsp;${weekday} ${day} ${month} ${year}`;
         };
 
